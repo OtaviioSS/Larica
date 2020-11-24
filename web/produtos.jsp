@@ -173,7 +173,6 @@
             "funcao") != null && request.getParameter("funcao").equals("editar")) {
         out.print("<script>$('#modalDados').modal('show');</script>");
     }
-
 %>
 
 <%    if (request.getParameter(

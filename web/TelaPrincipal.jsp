@@ -186,7 +186,7 @@
                                         while (rs.next()) {
                                             nomeCat = rs.getString(2);
                                         }
-                                        out.print("<option value ='" + nomeProduto + "'>" + nomeCat + "</option >");
+                                        out.print("<option  value ='" + nomeProduto + "'>" + nomeCat + "</option >");
 
                                     }
 
@@ -195,7 +195,7 @@
 
                                     while (rs.next()) {
                                         if (!nomeCat.equals(rs.getString(2))) {
-                                            out.print("<option value ='" + rs.getString(2) + "'>" + rs.getString(2) + "</option >");
+                                            out.print("<option onclick='reload()'  value ='" + rs.getString(2) + "'>" + rs.getString(2) + "</option >");
                                         }
 
                                     }
@@ -227,17 +227,16 @@
                         <div class="form-group">
                             <label>Valor</label>
                             <select  class="form-control form-control-sm" name="vlrTotal" id="vlrTotal">
-                                <!-- -->
+
                                 <%
                                     // Recuperar o nome do campo para mostrar de inicio no select 
                                     if (!nomeProduto.equals("")) {
-                                        rs = st.executeQuery("SELECT * FROM produtos where id = '" + valorProduto + "'");
+                                        rs = st.executeQuery("SELECT DISTINCT preco from produtos where nome = '" + nomeProduto + "'");
 
                                         while (rs.next()) {
                                             vlrCat = rs.getString(4);
                                         }
-                                        out.print("<option value ='" + valorProduto + "'>" + vlrCat + "</option >");
-
+                                        //out.print("<option value ='" + valorProduto + "'>" + vlrCat + "</option >");
                                     }
 
                                     st = new Conexao().conectar().createStatement();
@@ -245,12 +244,14 @@
 
                                     while (rs.next()) {
                                         if (!vlrCat.equals(rs.getString(4))) {
-                                            out.print("<option value ='" + rs.getString(4) + "'>" + rs.getString(4) + "</option >");
-                                        }
 
+                                        }
+                                        out.print("<option value ='" + rs.getString(4) + "'>" + rs.getString(4) + "</option >");
                                     }
+
+
                                 %>
-                                <option value=""></option>
+                                <!--<option value=""></option>-->
                             </select>
                         </div>
 
@@ -273,13 +274,22 @@
         </div>
     </div>
 
-    <%    if (request.getParameter(
+    <%
+        if (request.getParameter(
                 "funcao") != null && request.getParameter("funcao").equals("novo")) {
             out.print("<script>$('#modalDados').modal('show');</script>");
         }
 
     %>
+    <script>
+        function reload() {
+            var container = document.getElementById("vlrTotal");
+            container = document.location.reload(true);
 
+            //this line is to watch the result in console , you can remove it later
+            console.log("Refreshed");
+        }
+    </script>
     <!--AJAX PARA INSERIR DADOS COM IMAGEM -->
     <script type="text/javascript">
         $("#form").submit(function () {

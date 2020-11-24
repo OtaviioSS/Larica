@@ -10,7 +10,7 @@
     try {
 
         st = new Conexao().conectar().createStatement();
-        st.executeUpdate("DELETE from produtos where id = '" + id + "'");
+        st.executeUpdate("DELETE from carrinho where id = '" + id + "'");
 
         out.print("Excluído com Sucesso!!");
     } catch (Exception e) {

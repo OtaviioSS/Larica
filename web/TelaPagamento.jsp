@@ -23,10 +23,10 @@
     <% String buscar = request.getParameter("txtbuscar"); %>
     <% String nomeCat = ""; %>
     <%
-
         Statement st, st2 = null;
         ResultSet rs, rs2 = null;
     %>
+    
     <div class="container mt-4">
         <% out.print(" <table class='table table-sm table-striped' style='font-size: 11px'>"
                     + "<thead>"
@@ -90,6 +90,7 @@
 
     </div>
 
+        
 
     <div class="container mb-4" style="margin-top: 120px">
 
